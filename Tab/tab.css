@@ -1,0 +1,41 @@
+.tab {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+}
+
+.tab::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
+.tab .tab-lists {
+    display: -webkit-box;
+}
+
+.tab .tab-list {
+    height: 40px;
+    padding: 0 25px;
+    line-height: 40px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #666;
+}
+
+.tab .tab-list.active {
+    border-bottom: 2px solid #23beae;
+    color: #23beae;
+}
+
+.tab .oneline {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    white-space: pre-line;
+}
