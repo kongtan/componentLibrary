@@ -3,8 +3,10 @@ function stepper(obj) {
     $.extend(this, {
         value: 1,
         minCount: 0,
-        maxCount: 5
+        maxCount: 5,
+        diffValue: 1
     }, obj);
+    this.diffValue = Math.abs(this.diffValue);
     this.maxCount = this.minCount > this.maxCount ? tis.minCount : this.maxCount;
     this.value = this.value > this.maxCount ? this.maxCount : this.value < this.minCount ? this.minCount : this.value;
     this.update();
@@ -21,13 +23,15 @@ stepper.prototype = {
                 delete: function () {
                     if (self.value == self.minCount) return;
                     else {
-                        self.value--;
+                        self.value -= self.diffValue;
+                        self.value = self.value < self.minCount ? self.minCount : self.value;
                     }
                 },
                 add: function () {
                     if (self.value == self.maxCount) return;
                     else {
-                        self.value++;
+                        self.value += self.diffValue;
+                        self.value = self.value > self.maxCount ? self.maxCount : self.value;
                     }
                 }
             }
@@ -53,4 +57,4 @@ stepper.prototype = {
         this.addEvent();
     }
 }
-var Stepper = new stepper({ circleDom: $('.stepper'), value: 3, minCount: 1, maxCount: 6, callback: function (value) { console.log(value) } });
+var Stepper = new stepper({ circleDom: $('.stepper'), value: 3, minCount: 1, maxCount: 6, diffValue: -2, callback: function (value) { console.log(value) } });
