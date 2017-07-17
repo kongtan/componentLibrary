@@ -1,0 +1,46 @@
+.stepper {
+    display: -webkit-box;
+    -webkit-box-align: center;
+    width: 100px;
+}
+
+.stepper-value {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e4e4e4;
+    border-radius: 2px;
+    box-sizing: border-box;
+    line-height: normal;
+    text-align: center;
+    font-size: 14px;
+}
+
+.stepper-delete {
+    width: 35px;
+    height: 30px;
+}
+
+.stepper-delete.stepper-delete-normal {
+    background: url("img/numberbtn_minus_disable.png");
+    background-size: 100% 100%;
+}
+
+.stepper-delete-active {
+    background: url("img/numberbtn_minus_on.png");
+    background-size: 100% 100%;
+}
+
+.stepper-add {
+    width: 35px;
+    height: 30px;
+}
+
+.stepper-add.stepper-add-normal {
+    background: url("img/numberbtn_add_disable.png");
+    background-size: 100% 100%;
+}
+
+.stepper-add-active {
+    background: url("img/numberbtn_add_on.png");
+    background-size: 100% 100%;
+}
