@@ -4,7 +4,8 @@ function stepper(obj) {
         value: 1,
         minCount: 0,
         maxCount: 5,
-        diffValue: 1
+        diffValue: 1,
+        needInput: false
     }, obj);
     this.diffValue = Math.abs(this.diffValue);
     this.maxCount = this.minCount > this.maxCount ? tis.minCount : this.maxCount;
@@ -28,6 +29,7 @@ stepper.prototype = {
                     }
                 },
                 add: function () {
+                    console.log(121221)
                     if (self.value == self.maxCount) return;
                     else {
                         self.value += self.diffValue;
@@ -38,8 +40,12 @@ stepper.prototype = {
         objFnc[tag] && objFnc[tag]();
         self.update();
     },
-    update: function () {
-        this.circleDom.find('.stepper-value').val(this.value);
+    /**
+     * 更新状态
+     * @param noUpDate 是否需要刷新值 默认为false
+     */
+    update: function (noUpDate) {
+        !noUpDate && this.circleDom.find('.stepper-value').val(this.value);
         this.value >= this.maxCount ? this.circleDom.find('.stepper-add').addClass('stepper-add-normal') : this.circleDom.find('.stepper-add').removeClass('stepper-add-normal');
         this.value <= this.minCount ? this.circleDom.find('.stepper-delete').addClass('stepper-delete-normal') : this.circleDom.find('.stepper-delete').removeClass('stepper-delete-normal');
         this.callback && this.callback(this.value);
@@ -52,9 +58,25 @@ stepper.prototype = {
         self.circleDom.find('.stepper-add').off('click').on('click', function () {
             self.changeCount('add');
         });
+        self.circleDom.find('.stepper-value').on('input propertychang', function () {
+            var value = $(this).val();
+            if (!/\D/g.test(value) && value >= self.minCount && value <= self.maxCount) {
+                self.value = +value;
+                self.update(true);
+            }
+            else {
+                value = +(value.replace(/\D/g, ''));
+                self.value = value > self.minCount ? value < self.maxCount ? value : self.maxCount : self.minCount
+                self.update();
+            }
+        });
+    },
+    setCss: function () {
+        this.needInput && this.circleDom.find('.stepper-value').attr('readonly', null);
     },
     init: function () {
+        this.setCss();
         this.addEvent();
     }
 }
-var Stepper = new stepper({ circleDom: $('.stepper'), value: 3, minCount: 1, maxCount: 6, diffValue: -2, callback: function (value) { console.log(value) } });
+var Stepper = new stepper({ circleDom: $('.stepper'), value: 3, minCount: 2, maxCount: 6, diffValue: -2, needInput: true, callback: function (value) { console.log(value) } });
