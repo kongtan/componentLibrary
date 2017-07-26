@@ -56,14 +56,11 @@ img {
     outline: 0;
 }
 
-.clear {
-    zoom: 1;
-}
-
 .clear:after {
     content: "";
     display: block;
     clear: both;
+    overflow: hidden;
 }
 
 .none {

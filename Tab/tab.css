@@ -1,9 +1,17 @@
-.tab {
+
+.tab-circle{
     width: 100%;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    background: #fff;
+    position: relative;
+}
+.tab {
+    -webkit-box-flex: 1;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    background: #fff;
+    display: -webkit-box;
 }
 
 .tab::-webkit-scrollbar {
@@ -11,11 +19,7 @@
     display: none;
 }
 
-.tab .tab-lists {
-    display: -webkit-box;
-}
-
-.tab .tab-list {
+.tab-list {
     height: 40px;
     padding: 0 25px;
     line-height: 40px;
@@ -25,12 +29,57 @@
     color: #666;
 }
 
-.tab .tab-list.active {
+.tab-list.active {
     border-bottom: 2px solid #23beae;
     color: #23beae;
 }
-
-.tab .oneline {
+.arrow-circle{
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    width: 30px;
+    height: 40px;
+}
+.arrow{
+    display: block;
+    width: 8px;
+    height: 13px;
+    -webkit-box-flex: 0;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transition: .3s;
+}
+.arrow.arrow-trans{
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+.main-block{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    background: #fff;
+    padding: 10px 15px 0;
+}
+.main-list{
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #e4e4e4;
+    color: #666;
+    margin-bottom: 10px;
+}
+.main-list.active {
+    border: 1px solid #23beae;
+    color: #23beae;
+}
+.main-list:nth-of-type(4n){
+    margin-right: 0;
+}
+.oneline {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     overflow: hidden;
