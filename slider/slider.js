@@ -116,7 +116,7 @@ scrollSlide.prototype={
      * 增加小圆点
      */
     addDot:function(){
-        var self=this,dotHtml='<ul class="dot-list">';
+        var self=this,dotHtml='<ul class="dot-list" ontouchmove="return false;">';
         for(var i=0;i<self.totalcount;i++){
             dotHtml+='<li class="dot"></li>';
         }
