@@ -22,7 +22,7 @@ tab.prototype = {
             // 加入箭头
             html += '<div class="arrow-circle"><img src="./arrow.png" class="arrow"></div>';
             // 加入下拉元素
-            html += '<ul class="main-block clear none">' + dropDownDom + '</div>';
+            html += '<ul class="main-block clear none">' + dropDownDom + '</ul>';
         }
         self.circleDom[0].innerHTML = html;
         self.tabDom = self.circleDom.find('.tab');
