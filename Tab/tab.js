@@ -2,7 +2,7 @@ function tab(obj) {
     $.extend(this, {
         isDropdown: false,
         number: 0,
-        speed: 150
+        speed: 300
     }, obj);
     this.init();
 }
@@ -56,14 +56,14 @@ tab.prototype = {
                 var distance = this.offsetLeft - (self.tabWidth - $(this).width()) / 2, // 元素应当滑动的位置
                     nowScrollLeft = self.tabDom.scrollLeft(),  // 最外层元素现在的滑动距离
                     diff = nowScrollLeft - distance, // 距离差
-                    speed = diff > 0 ? -self.tabWidth / self.speed : self.tabWidth / self.speed; // 速度
+                    speed = -diff *20  / self.speed; // 速度
                 self.distance = distance;
                 self.timer = setInterval(function () {
                     nowScrollLeft += speed;
                     self.tabDom.scrollLeft(nowScrollLeft);
                     if (nowScrollLeft <= distance && diff > 0) clearInterval(self.timer);
                     else if (nowScrollLeft > distance && diff < 0) clearInterval(self.timer);
-                }, 0)
+                }, 20)
             }
 
             self.tabCallback && self.tabCallback($(e.target), self.number) // 回调
@@ -101,5 +101,5 @@ tab.prototype = {
         this.innerHTML();
     }
 }
-var dataList = [{ text: 'tab1' }, { text: 'tab2' }, { text: 'tab3' }, { text: 'tab4' }, { text: 'tab5' }, { text: 'tab6' }, { text: 'tab7' }]
-var Tab = new tab({ circleDomClass: 'tab-circle', data: dataList, nodeName: 'text', speed: 150, number: 4, tabCallback: function (e, index) { console.log(e, index) }, isDropdown: false, arrowShowCallback: function () { console.log('show') }, arrowHideCallback: function () { console.log('hide') } });
+var dataList = [{ text: 'tab1' }, { text: 'tab2' }, { text: 'tab3' }, { text: 'tab4' }, { text: 'tab5' }, { text: 'tab6' }, { text: 'tab7' }, { text: 'tab8' }, { text: 'tab9' }, { text: 'tab10' }, { text: 'tab11' }, { text: 'tab12' }, { text: 'tab13' }, { text: 'tab14' }]
+var Tab = new tab({ circleDomClass: 'tab-circle', data: dataList, nodeName: 'text', speed: 300, number: 4, tabCallback: function (e, index) { console.log(e, index) }, isDropdown: true, arrowShowCallback: function () { console.log('show') }, arrowHideCallback: function () { console.log('hide') } });
