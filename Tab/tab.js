@@ -57,7 +57,6 @@ tab.prototype = {
                     nowScrollLeft = self.tabDom.scrollLeft(),  // 最外层元素现在的滑动距离
                     diff = nowScrollLeft - distance, // 距离差
                     speed = -diff *20  / self.speed; // 速度
-                    console.log(nowScrollLeft)
                 self.distance = distance;
                 self.timer = setInterval(function () {
                     nowScrollLeft += speed;
