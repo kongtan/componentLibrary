@@ -48,7 +48,7 @@ tab.prototype = {
             self.timer && clearInterval(self.timer); //清除计时器
             // 切换活跃状态
             $(this).addClass('active').siblings().removeClass('active');
-            self.tabDom.scrollLeft(self.distance);
+            // self.tabDom.scrollLeft(self.distance);
             // 更改下拉元素css
             $(self.circleDom.find('.main-list')[self.number]).addClass('active').siblings().removeClass('active');
             if (self.isNeedSlide) {
@@ -57,6 +57,7 @@ tab.prototype = {
                     nowScrollLeft = self.tabDom.scrollLeft(),  // 最外层元素现在的滑动距离
                     diff = nowScrollLeft - distance, // 距离差
                     speed = -diff *20  / self.speed; // 速度
+                    console.log(nowScrollLeft)
                 self.distance = distance;
                 self.timer = setInterval(function () {
                     nowScrollLeft += speed;
