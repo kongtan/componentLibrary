@@ -11,7 +11,8 @@ function scrollSlide(obj) {
     };
     $.extend(this, defaultObj, obj);
     this.totalcount = this.childDom.length;  //滑动页面数
-    this.totalcount==1&&(this.loop=false);
+    this.totalcount == 1 && (this.loop = false);
+    this.isScroll = 0; //控制自由滑动的参数 0:初始化 1:轮播滑动 2：普通页面滚动
     this.length = this.horizontal ? this.width : this.height; //垂直滑动则为高度，水平滑动则为宽度
     this.count = !this.loop ? (obj.count ? ((obj.count - 1) % this.totalcount) : 0) : (obj.count ? (obj.count % this.totalcount == 0 ? this.totalcount : obj.count % this.totalcount) : 1); //当前页面，默认从第一个开始
     this.init();
@@ -32,12 +33,14 @@ scrollSlide.prototype = {
     startFnc: function (event) {
         var self = this,
             touches = event.touches ? event.touches : event.originalEvent.touches;
+        self.isScroll = 0; //每次滑动开始初始化参数
         if (self.loop) {
             self.count == self.totalcount + 1 && (self.count = 1);
             self.count == 0 && (self.count = self.totalcount);
         }
         self.distancepoi = 0; //滑动距离重置，防止点击后直接滑动
         self.startpoi = self.horizontal ? touches[0].pageX : touches[0].pageY;
+        self.startpoiReverse = self.horizontal ? touches[0].pageY : touches[0].pageX; //控制横向轮播时上下滑动的参数
         self.movelength = -self.count * self.length;  //记录上次滑动距离
         self.setCssStyle(self.movelength, 0); //防止
     },
@@ -47,8 +50,17 @@ scrollSlide.prototype = {
     touchFnc: function (event) {
         var self = this,
             touches = event.touches ? event.touches : event.originalEvent.touches;
-        self.horizontal || event.preventDefault();
+        if (self.isScroll == 2) {
+            console.log(1)
+            return;
+        }
         self.distancepoi = (self.horizontal ? touches[0].pageX : touches[0].pageY) - self.startpoi;
+        if (self.isScroll == 0 ) {
+            self.distancepoiReverse = (self.horizontal ? touches[0].pageY : touches[0].pageX) - self.startpoiReverse;
+            self.isScroll = Math.abs(self.distancepoiReverse) > Math.abs(self.distancepoi) ? 2 : 1;
+            if (self.isScroll == 2) return;
+            else event.preventDefault();
+        }
         if (!self.loop && !self.resilience && ((self.count == 0 && self.distancepoi > 0) || (self.count == (self.totalcount - 1) && self.distancepoi < 0))) return; //上下两端拉动无效果,禁止回弹
         self.setCssStyle(self.distancepoi + self.movelength, 0);  //滑动中...
     },
@@ -57,6 +69,7 @@ scrollSlide.prototype = {
      */
     endFnc: function (event) {
         var self = this, interimCount = self.count;
+        if(self.isScroll == 2) return;
         if (!self.loop) {
             if (self.distancepoi >= self.range && self.count > 0) self.count--; //下滑--右划
             else if (self.distancepoi <= -self.range && self.count < self.totalcount - 1) self.count++; //上划--左划
