@@ -50,10 +50,7 @@ scrollSlide.prototype = {
     touchFnc: function (event) {
         var self = this,
             touches = event.touches ? event.touches : event.originalEvent.touches;
-        if (self.isScroll == 2) {
-            console.log(1)
-            return;
-        }
+        if (self.isScroll == 2) return;
         self.distancepoi = (self.horizontal ? touches[0].pageX : touches[0].pageY) - self.startpoi;
         if (self.isScroll == 0 ) {
             self.distancepoiReverse = (self.horizontal ? touches[0].pageY : touches[0].pageX) - self.startpoiReverse;
