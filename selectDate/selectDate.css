@@ -1,0 +1,72 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+.date-circle{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.shade{
+    -webkit-box-flex: 1;
+    background: rgba(0,0,0,.6);
+}
+.select-main{
+
+}
+.select-title{
+    height: 42px;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    padding: 0 10px;
+    color: #fff;
+    background: #b5b0b0;
+}
+.select-title-left{
+    font-size: 14px;
+}
+.select-title-center{
+    font-size: 16px;
+}
+.select-title-right{
+    font-size: 14px;
+}
+.select{
+    width: 100%;
+    height: 175px;
+    display: -webkit-box;
+}
+.year-lists,.month-lists,.day-lists{
+    width: 0;
+    -webkit-box-flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+.year-list,.month-list,.day-list{
+    width: 100%;
+}
+.year-list li,.month-list li,.day-list li{
+    width: 100%;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    font-size: 16px;
+    color: #333;
+}
+.year-lists-pop,.month-lists-pop,.day-lists-pop{
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 175px;
+    width: 100%;
+    background: linear-gradient(#fff 0,rgba(245,245,245,0) 52%,rgba(245,245,245,0) 48%,#fff 100%);
+    background: -webkit-linear-gradient(#fff 0,rgba(245,245,245,0) 52%,rgba(245,245,245,0) 48%,#fff 100%);
+    z-index: 2;
+}
