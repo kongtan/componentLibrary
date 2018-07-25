@@ -19,6 +19,11 @@ class Marquee {
         return document.querySelector(tag);
     }
     setCss(){
+        Object.assign(this.getDom('.' + this.parentClass).style , {
+            'display': '-webkit-box',
+            'overflow-x': 'auto',
+            '-webkit-box-align': 'center'
+        });
         this.getDom('.'+this.childClass).style['min-width']=this.getDom('.'+this.parentClass).offsetWidth+'px';
     }
     createHtml(){
