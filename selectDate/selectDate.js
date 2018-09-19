@@ -1,5 +1,6 @@
 function selectDate(obj={}) {
     var defaultObj = {
+        type:'day',
         startYear: new Date().getFullYear() - 20,
         endYear: new Date().getFullYear() + 20,
         rubSpeed: 1500, //惯性加速度
@@ -13,7 +14,7 @@ function selectDate(obj={}) {
     this.circleHeight = this.get('.year-lists').clientHeight;
     const dateArr=[{className:'year',day:this.endYear-this.startYear+1},{className:'month',day:12},{className:'day',day:31}]
     dateArr.map((item,index)=>{
-        arrItem={
+        let arrItem={
             value:this.trueDate[index],
             distance: ((this.circleHeight - this.unitHeight) / 2)-this.get('.'+item.className+'[tag="'+this.trueDate[index]+'"]').offsetTop,
             className: item.className,
@@ -136,7 +137,7 @@ selectDate.prototype = {
     confirm(){
         const date=this.data.map(item=>item.value).join('-');
         this.trueDate=date.split('-');
-        this.callback&&this.callback(date);
+        this.callback&&this.callback(this.trueDate.slice(0,this.type=='year'?1:(this.type=='month'?2:3)));
         this.toggle();
     },
     cancel(){
@@ -157,10 +158,10 @@ selectDate.prototype = {
         for (let i=this.startYear;i<=this.endYear;i++){
             yearDom+='<li class="year" tag="'+i+'">'+i+'</li>';
         }
-        for (i=1;i<=12;i++){
+        for (let i=1;i<=12;i++){
             monthDom+='<li class="month" tag="'+i+'">'+i+'</li>';
         }
-        for (i=1;i<=31;i++){
+        for (let i=1;i<=31;i++){
             dayDom+='<li class="day" tag="'+i+'">'+i+'</li>';
         }
         var dom=`<p class="shade" ontouchmove="return false;"></p>
@@ -194,6 +195,11 @@ selectDate.prototype = {
         newElement.className="date-circle"
         newElement.innerHTML=dom;
         document.body.appendChild(newElement);
+        if(this.type=='month') this.get('.day-lists').style['-webkit-box-flex']=0;
+        if(this.type=='year') {
+            this.get('.day-lists').style['-webkit-box-flex']=0;
+            this.get('.month-lists').style['-webkit-box-flex']=0;
+        }
     },
     /**
      * 初始化方法

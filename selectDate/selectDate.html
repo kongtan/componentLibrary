@@ -16,7 +16,7 @@
 <body>
 	<script src="selectDate.js"></script>
 	<script>
-		let SelectDate=new selectDate({importDate:"2017-02-29"});
+		let SelectDate=new selectDate({importDate:"2017-02-29",callback:function(data){console.log(data)},type:'year'});
 	</script>
 </body>
 
