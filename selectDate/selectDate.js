@@ -8,6 +8,9 @@ function selectDate(obj={}) {
         data: []
     };
     Object.assign(this,defaultObj,obj);
+    //清楚dom
+    let dom=document.querySelector('.date-circle');
+    if(dom) document.querySelector('body').removeChild(dom);
     this.insertDom();
     this.trueDate = [this.defaultDate.getFullYear(),this.defaultDate.getMonth()+1,this.defaultDate.getDate()];
     this.unitHeight = this.get('.year').clientHeight;
