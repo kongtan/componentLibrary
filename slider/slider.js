@@ -112,7 +112,7 @@ scrollSlide.prototype = {
         }, 50)
     },
     /**
-     * 设置css样式
+     * 动态设置css样式
      * @param length
      * @param time
      */
@@ -135,7 +135,23 @@ scrollSlide.prototype = {
         }
         dotHtml += '</ul>';
         self.outDom.append(dotHtml);
+        self.setDotCss();
         !self.loop ? ($(self.outDom.find('.dot')[self.count]).addClass('active')) : ($(self.outDom.find('.dot')[self.count - 1]).addClass('active')); //此时的count为初始态count，标志着起初页面为第几个
+    },
+    /**
+     * 设置小圆点css
+     */
+    setDotCss:function(){
+        $('.dot-list').css({position:'absolute',left:'0',bottom:'0',width:'100%',height:'15px',display:'-webkit-box','-webkit-box-align':'center','-webkit-box-pack':'center'});
+        $('.dot').css({'margin-right':'10px',width:'8px',height:'8px','border-radius':'30px',opacity:'.7',background:'#fff'});
+        $('.dot:nth-last-of-type(1)').css('margin-right','0');
+    },
+    /**
+     * 设置轮播css
+     */
+    setSlideCss:function(){
+        this.outDom.css({position:'relative',top:'0',left:'0',overflow:'hidden','z-index':'5','font-size':'0'});
+        this.childDom.css({position:'relative',overflow:'hidden',display:'inline-block'});
     },
     /**
      * 初始化方法
@@ -147,9 +163,9 @@ scrollSlide.prototype = {
         this.dot && this.totalcount != 1 && this.addDot();
         this.childDom.css({ 'height': this.height + 'px', 'width': this.width + 'px' });
         this.outDom.css({ 'height': this.height + 'px', 'width': this.width + 'px' });
-        this.parentDom.css('width', (this.loop ? this.width * (this.totalcount + 2) : (this.width * this.totalcount)) + 'px');
-        this.horizontal && (this.parentDom.css({ 'display': '-webkit-box' }));
+        this.horizontal&&this.parentDom.css('width', (this.loop ? this.width * (this.totalcount + 2) : (this.width * this.totalcount)) + 'px');
         this.loop && (this.parentDom.append(this.childDom[0].outerHTML)) && ($(this.childDom[this.totalcount - 1].outerHTML).insertBefore(this.childDom[0])); //可循环则新增一个元素
+        this.setSlideCss();
         this.setCssStyle(-this.count * this.length, 0);
         this.firstCallback && this.callback(this.count, this.totalcount);
         this.loop && this.auto && this.totalcount != 1 && this.autoPlay();
@@ -163,5 +179,6 @@ scrollSlide.prototype = {
         var self = this, activeCount;
         activeCount = self.loop ? (self.count == 0 ? (self.totalcount - 1) : (self.count == (self.totalcount + 1) ? 0 : self.count - 1)) : self.count;
         $(self.outDom.find('.dot')[activeCount]).addClass('active').siblings().removeClass('active');
+        $('.dot.active').css('opacity','1').siblings().css('opacity','.7');
     }
 }

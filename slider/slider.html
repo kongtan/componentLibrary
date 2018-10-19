@@ -9,22 +9,21 @@
 	<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 	<title>多功能轮播</title>
 	<link rel="stylesheet" href="../baseCss.css">
-	<link rel="stylesheet" href="slider.css">
 </head>
 <style></style>
 
 <body>
 	<section class="slide-circle">
 		<ul class="slide-block-circle">
-			<li class="slide-block">1</li>
-			<li class="slide-block">2</li>
-			<li class="slide-block">3</li>
+			<li class="slide-block" style="font-size:26px">1</li>
+			<li class="slide-block" style="font-size:26px">2</li>
+			<li class="slide-block" style="font-size:26px">3</li>
 		</ul>
 	</section>
 	<script src="../zepto1.2.0.js"></script>
 	<script src="slider.js"></script>
 	<script>
-		var ScrollSlide = new scrollSlide({ childDom: $('.slide-block'), parentDom: $('.slide-block-circle'), outDom: $('.slide-circle') });
+		var ScrollSlide = new scrollSlide({ childDom: $('.slide-block'), parentDom: $('.slide-block-circle'), outDom: $('.slide-circle'), dot: true, loop: true, auto: true });
 	</script>
 </body>
 
