@@ -13,9 +13,9 @@ function selectDate(obj={}) {
     if(dom) document.querySelector('body').removeChild(dom);
     this.insertDom();
     this.trueDate = [this.defaultDate.getFullYear(),this.defaultDate.getMonth()+1,this.defaultDate.getDate()];
-    this.unitHeight = this.get('.year').clientHeight;
+    this.unitHeight = this.get('.cl-year').clientHeight;
     this.circleHeight = this.get('.cl-year-lists').clientHeight;
-    const dateArr=[{className:'year',day:this.endYear-this.startYear+1},{className:'month',day:12},{className:'day',day:31}]
+    const dateArr=[{className:'cl-year',day:this.endYear-this.startYear+1},{className:'cl-month',day:12},{className:'cl-day',day:31}]
     dateArr.map((item,index)=>{
         let arrItem={
             value:this.trueDate[index],
@@ -81,7 +81,7 @@ selectDate.prototype = {
         const index = Math.abs(item.distance - item.maxDis) / this.unitHeight;
         item.value = +document.querySelectorAll('.' + item.className)[index].getAttribute('tag');
         this.setCssStyle(item.className, item.distance, time); //实时滑动距离
-        if (item.className == 'month' || item.className == 'year') this.changeRange(item.className, item.value);
+        if (item.className == 'cl-month' || item.className == 'cl-year') this.changeRange(item.className, item.value);
     },
     /**
      * 设置css样式
@@ -103,7 +103,7 @@ selectDate.prototype = {
     changeRange(className, value) {
         let day = 31,
             item = this.data[2];
-        if (className == 'year') {
+        if (className == 'cl-year') {
             if (this.data[1].value == 2) {
                 day = this.judgeMonth(value) ? 29 : 28;
             }
@@ -159,13 +159,13 @@ selectDate.prototype = {
             monthDom="",
             dayDom="";
         for (let i=this.startYear;i<=this.endYear;i++){
-            yearDom+='<li class="year" tag="'+i+'">'+i+'</li>';
+            yearDom+='<li class="cl-year" tag="'+i+'">'+i+'</li>';
         }
         for (let i=1;i<=12;i++){
-            monthDom+='<li class="month" tag="'+i+'">'+i+'</li>';
+            monthDom+='<li class="cl-month" tag="'+i+'">'+i+'</li>';
         }
         for (let i=1;i<=31;i++){
-            dayDom+='<li class="day" tag="'+i+'">'+i+'</li>';
+            dayDom+='<li class="cl-day" tag="'+i+'">'+i+'</li>';
         }
         var dom=`<p class="cl-shade" ontouchmove="return false;"></p>
                 <div class="cl-select-main">
