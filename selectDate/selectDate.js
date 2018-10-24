@@ -9,12 +9,12 @@ function selectDate(obj={}) {
     };
     Object.assign(this,defaultObj,obj);
     //清楚dom
-    let dom=document.querySelector('.date-circle');
+    let dom=document.querySelector('.cl-date-circle');
     if(dom) document.querySelector('body').removeChild(dom);
     this.insertDom();
     this.trueDate = [this.defaultDate.getFullYear(),this.defaultDate.getMonth()+1,this.defaultDate.getDate()];
     this.unitHeight = this.get('.year').clientHeight;
-    this.circleHeight = this.get('.year-lists').clientHeight;
+    this.circleHeight = this.get('.cl-year-lists').clientHeight;
     const dateArr=[{className:'year',day:this.endYear-this.startYear+1},{className:'month',day:12},{className:'day',day:31}]
     dateArr.map((item,index)=>{
         let arrItem={
@@ -42,9 +42,9 @@ selectDate.prototype = {
             this.get('.' + item.className + '-lists').addEventListener('touchend', () => { this.endFnc.apply(this, [item, event]) });
             this.setCssStyle(item.className, item.distance, 0);
         })
-        this.get('.select-title-right').addEventListener('click', this.confirm.bind(this));
-        this.get('.select-title-left').addEventListener('click', this.cancel.bind(this));
-        this.get('.shade').addEventListener('click', this.cancel.bind(this));
+        this.get('.cl-select-title-right').addEventListener('click', this.confirm.bind(this));
+        this.get('.cl-select-title-left').addEventListener('click', this.cancel.bind(this));
+        this.get('.cl-shade').addEventListener('click', this.cancel.bind(this));
     },
     /**
      * 开始触摸的回调
@@ -152,7 +152,7 @@ selectDate.prototype = {
         this.toggle();
     },
     toggle(){
-        this.get('.date-circle').style.display=this.get('.date-circle').style.display=='none'?'-webkit-box':'none';
+        this.get('.cl-date-circle').style.display=this.get('.cl-date-circle').style.display=='none'?'-webkit-box':'none';
     },
     insertDom(){
         let yearDom="",
@@ -167,41 +167,41 @@ selectDate.prototype = {
         for (let i=1;i<=31;i++){
             dayDom+='<li class="day" tag="'+i+'">'+i+'</li>';
         }
-        var dom=`<p class="shade" ontouchmove="return false;"></p>
-                <div class="select-main">
-                    <div class="select-title" ontouchmove="return false;">
-                        <p class="select-title-left">取消</p>
-                        <p class="select-title-right">确定</p>
+        var dom=`<p class="cl-shade" ontouchmove="return false;"></p>
+                <div class="cl-select-main">
+                    <div class="cl-select-title" ontouchmove="return false;">
+                        <p class="cl-select-title-left">取消</p>
+                        <p class="cl-select-title-right">确定</p>
                     </div>
-                        <div class="select">
-                            <div class="year-lists">
-                                <div class="year-lists-pop"></div>
-                                <ul class="year-list">`
+                        <div class="cl-select">
+                            <div class="cl-year-lists">
+                                <div class="cl-year-lists-pop"></div>
+                                <ul class="cl-year-list">`
                                     + yearDom +
                                 `</ul>
                             </div>
-                            <div class="month-lists">
-                                    <div class="month-lists-pop"></div>
-                                <ul class="month-list">`
+                            <div class="cl-month-lists">
+                                    <div class="cl-month-lists-pop"></div>
+                                <ul class="cl-month-list">`
                                     + monthDom +
                                 `</ul>
                             </div>
-                            <div class="day-lists">
-                                    <div class="day-lists-pop"></div>
-                                <ul class="day-list">`
+                            <div class="cl-day-lists">
+                                    <div class="cl-day-lists-pop"></div>
+                                <ul class="cl-day-list">`
                                     + dayDom +
                                 `</ul>
                             </div>
                         </div>
                 </div>`;
         const newElement=document.createElement('div');
-        newElement.className="date-circle"
+        newElement.className="cl-date-circle"
         newElement.innerHTML=dom;
         document.body.appendChild(newElement);
-        if(this.type=='month') this.get('.day-lists').style['-webkit-box-flex']=0;
+        if(this.type=='month') this.get('.cl-day-lists').style['-webkit-box-flex']=0;
         if(this.type=='year') {
-            this.get('.day-lists').style['-webkit-box-flex']=0;
-            this.get('.month-lists').style['-webkit-box-flex']=0;
+            this.get('.cl-day-lists').style['-webkit-box-flex']=0;
+            this.get('.cl-month-lists').style['-webkit-box-flex']=0;
         }
     },
     /**

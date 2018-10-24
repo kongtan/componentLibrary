@@ -2,7 +2,7 @@ body,html{
     width: 100%;
     height: 100%;
 }
-.date-circle{
+.cl-date-circle{
     position: fixed;
     top: 0;
     left: 0;
@@ -11,14 +11,14 @@ body,html{
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
-.shade{
+.cl-shade{
     -webkit-box-flex: 1;
     background: rgba(0,0,0,.6);
 }
-.select-main{
+.cl-select-main{
     background: #fff;
 }
-.select-title{
+.cl-select-title{
     height: 42px;
     display: -webkit-box;
     -webkit-box-align: center;
@@ -27,30 +27,30 @@ body,html{
     color: #fff;
     background: #b5b0b0;
 }
-.select-title-left{
+.cl-select-title-left{
     font-size: 14px;
 }
-.select-title-center{
+.cl-select-title-center{
     font-size: 16px;
 }
-.select-title-right{
+.cl-select-title-right{
     font-size: 14px;
 }
-.select{
+.cl-select{
     width: 100%;
     height: 175px;
     display: -webkit-box;
 }
-.year-lists,.month-lists,.day-lists{
+.cl-year-lists,.cl-month-lists,.cl-day-lists{
     width: 0;
     -webkit-box-flex: 1;
     position: relative;
     overflow: hidden;
 }
-.year-list,.month-list,.day-list{
+.cl-year-list,.cl-month-list,.cl-day-list{
     width: 100%;
 }
-.year-list li,.month-list li,.day-list li{
+.cl-year-list li,.cl-month-list li,.cl-day-list li{
     width: 100%;
     text-align: center;
     height: 35px;
@@ -58,7 +58,7 @@ body,html{
     font-size: 16px;
     color: #333;
 }
-.year-lists-pop,.month-lists-pop,.day-lists-pop{
+.cl-year-lists-pop,.cl-month-lists-pop,.cl-day-lists-pop{
     display: block;
     content: "";
     position: absolute;
