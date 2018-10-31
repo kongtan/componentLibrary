@@ -151,7 +151,7 @@ scrollSlide.prototype = {
      */
     setSlideCss:function(){
         this.outDom.css({position:'relative',top:'0',left:'0',overflow:'hidden','z-index':'5','font-size':'0'});
-        this.childDom.css({position:'relative',overflow:'hidden',display:'inline-block'});
+        $(this.childDom.selector).css({position:'relative',overflow:'hidden',display:'inline-block'});
     },
     /**
      * 初始化方法
