@@ -142,7 +142,7 @@ scrollSlide.prototype = {
      * 设置小圆点css
      */
     setDotCss:function(){
-        $('.dot-list').css({position:'absolute',left:'0',bottom:'0',width:'100%',height:'15px',display:'-webkit-box','-webkit-box-align':'center','-webkit-box-pack':'center'});
+        $('.dot-list').css({position:'absolute',left:'0',bottom:'10px',width:'100%',display:'-webkit-box','-webkit-box-align':'center','-webkit-box-pack':'center'});
         $('.dot').css({'margin-right':'10px',width:'8px',height:'8px','border-radius':'30px',opacity:'.7',background:'#fff'});
         $('.dot:nth-last-of-type(1)').css('margin-right','0');
     },
