@@ -33,6 +33,7 @@ scrollSlide.prototype = {
     startFnc: function (event) {
         var self = this,
             touches = event.touches ? event.touches : event.originalEvent.touches;
+        clearTimeout(self.timer);
         self.isScroll = 0; //每次滑动开始初始化参数
         if (self.loop) {
             self.count == self.totalcount + 1 && (self.count = 1);
@@ -77,11 +78,34 @@ scrollSlide.prototype = {
         }
         self.setCssStyle(-self.count * self.length, self.transitionTime); //实时滑动距离
         if (self.auto && self.loop) {
-            clearTimeout(self.timer);
             self.timer = setTimeout(self.play.bind(self), self.intervalTime);
         }
         interimCount != self.count && self.callbackloopType != 2 && self.callback(self.count, self.totalcount);
         self.dot && self.totalcount != 1 && self.changeDot();
+    },
+    /**
+     * 手动控制滑动
+     * @param {1:前进,2:后退} type 
+     */
+    toggle:function(type){
+        var self=this;
+        if ((type==1&&!self.reverse)||(type==2&&self.reverse)) {  //自动上滑
+            if(!self.loop&&self.count>=self.totalcount-1) return;
+            self.go();
+        }
+        else if((type==1&&self.reverse)||(type==2&&!self.reverse)){  //自动下滑
+            if(!self.loop&&self.count<=0) return;
+            self.back();
+        }
+        clearTimeout(self.timer);
+        setTimeout(function () {
+            self.setCssStyle(-self.count * self.length, self.transitionTime);
+            self.dot && self.totalcount != 1 && self.changeDot();
+            if (self.auto && self.loop) {
+                self.timer = setTimeout(self.play.bind(self), self.intervalTime);
+            }
+            self.callbackloopType != 1 && self.callback(self.count, self.totalcount);
+        }, 50)
     },
     /**
      * 自动播放
@@ -91,18 +115,26 @@ scrollSlide.prototype = {
         self.timer = setTimeout(self.play.bind(self), self.intervalTime);
     },
     /**
+     * 前进
+     */
+    go: function() {
+        this.count == this.totalcount + 1 && (this.count = 1) && (this.setCssStyle(-this.count * this.length, 0))
+        this.count++;
+    },
+    /**
+     * 后退
+     */
+    back: function() {
+        this.count == 0 && (this.count = this.totalcount) && (this.setCssStyle(-this.count * this.length, 0));
+        this.count--;
+    },
+    /**
      * 自动播放逻辑
      */
     play: function () {
         var self = this;
-        if (!self.reverse) {  //自动上滑
-            self.count == self.totalcount + 1 && (self.count = 1) && (self.setCssStyle(-self.count * self.length, 0))
-            self.count++;
-        }
-        else {  //自动下滑
-            self.count == 0 && (self.count = self.totalcount) && (self.setCssStyle(-self.count * self.length, 0));
-            self.count--;
-        }
+        if (!self.reverse) self.go();  //自动上滑
+        else self.back();  //自动下滑
         setTimeout(function () {
             self.setCssStyle(-self.count * self.length, self.transitionTime);
             self.dot && self.totalcount != 1 && self.changeDot();
